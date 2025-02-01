@@ -1,0 +1,34 @@
+# Define green color for success messages
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+# Loop through all config* files
+for file in /root/ceremonyclient/node/.config/config*; do
+    echo "🛠️ Processing $file"
+
+    echo "🗑️ Deleting the old 'dataWorkerMultiaddrs' block in $file..."
+    sed -i '/dataWorkerMultiaddrs:/,/]/d' "$file" && echo "✅ Old block deleted in $file." || echo "❌ Failed to delete in $file!"
+
+    echo "📂 Verifying if 'dataw' exists..."
+    if [ -f /root/dataw ]; then
+        echo "✅ 'dataw' found."
+    else
+        echo "❌ 'dataw' not found at /root/dataw. Exiting."
+        exit 1
+    fi
+
+    echo "📄 Content of 'dataw' to be inserted into $file:"
+    cat /root/dataw || echo "❌ Failed to read 'dataw'!"
+
+    echo "📝 Inserting 'dataw' content after 'engine:' in $file..."
+    sed -i "/engine:/r /root/dataw" "$file" && echo "✅ Insertion complete in $file." || echo "❌ Failed to insert into $file!"
+
+    echo "🔍 Verifying the new 'dataWorkerMultiaddrs' block in $file..."
+    if grep -A 20 "dataWorkerMultiaddrs" "$file" > /dev/null; then
+        echo -e "${GREEN}🟢 SUCCESS: '$file' updated successfully.${NC}"
+    else
+        echo "❌ 'dataWorkerMultiaddrs' not found in $file!"
+    fi
+
+    echo "-----------------------------------------"
+done
