@@ -1,25 +1,39 @@
-#!/bin/bash
-
-echo "Did you backup your keys? Please remove your config.yml from the .config folder. So we can create a new config."
-read -p "Do you want to proceed? (y/N): " response
-
-# Convert input to lowercase
-response=${response,,}
-
-if [[ "$response" != "y" ]]; then
-    echo "Operation canceled."
-    exit 1
-fi
-
-cd /root/ceremonyclient/node
-
-for i in {1..12}; do
-    ./node-2.0.6.1-linux-amd64 --peer-id
-    mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config$i
-    mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys$i
-    cd /root/ceremonyclient/node
-done
-
-./node-2.0.6.1-linux-amd64 --peer-id
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
+mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config1
+mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys1
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
+mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config2
+mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys2
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
+mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config3
+mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys3
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
+mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config4
+mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys4
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
+mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config5
+mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys5
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
+mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config6
+mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys6
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
+mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config7
+mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys7
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
+mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config8
+mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys8
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
+mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config9
+mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys9
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
+mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config10 
+mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys10
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
+mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config11 
+mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys11
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
+mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config12 
+mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys12
+cd /root/ceremonyclient/node ; ./node-2.0.6.1-linux-amd64 --peer-id
 echo '1' >> /root/active_nr
 echo '13 Configs created. Config active_nr: 0'
