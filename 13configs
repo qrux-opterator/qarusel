@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "Did you backup your keys? Please remove your config.yml from the .config folder. So we can create a new config."
+read -p "Do you want to proceed? (y/N): " response
+
+# Convert input to lowercase
+response=${response,,}
+
+if [[ "$response" != "y" ]]; then
+    echo "Operation canceled."
+    exit 1
+fi
+
+cd /root/ceremonyclient/node
+
+for i in {1..12}; do
+    ./node-2.0.6.1-linux-amd64 --peer-id
+    mv /root/ceremonyclient/node/.config/config.yml /root/ceremonyclient/node/.config/config$i
+    mv /root/ceremonyclient/node/.config/keys.yml /root/ceremonyclient/node/.config/keys$i
+    cd /root/ceremonyclient/node
+done
+
+./node-2.0.6.1-linux-amd64 --peer-id
+echo '1' >> /root/active_nr
+echo '13 Configs created. Config active_nr: 0'
